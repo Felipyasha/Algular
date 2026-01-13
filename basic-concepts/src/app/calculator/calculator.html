@@ -1,6 +1,6 @@
 <div class="container">
     <div class="form-box">
-        <form #form1="ngForm">
+        <form #form1="ngForm" (ngSubmit)="calcResult()">
             <h2>Calculator</h2>
             <label for="number1">Number 1</label>
             <input type="number" name="number1" id="number1" [(ngModel)]="number1"/>
@@ -8,7 +8,7 @@
             <label for="number2">Number 2</label>
             <input type="number" name="number2" id="number2" [(ngModel)]="number2"/>
 
-            <button type="button" (click)="calcResult()">Add</button>
+            <button type="submit">Add</button>
         </form>
 
         <div class="result-display">
