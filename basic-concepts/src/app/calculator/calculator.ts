@@ -7,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrl: './calculator.scss',
 })
 export class Calculator {
+    number1: number = 0;
+    number2: number = 0;
+    value: number = 0;
 
+    calcResult(){
+        this.value = this.number1 + this.number2;
+    }
+
+    
 }
