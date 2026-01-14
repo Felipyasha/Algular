@@ -1,8 +1,8 @@
 <div class="container">
     <h1>Wish List</h1>
 
-    <form class="add-item-form">
-        <input type="text" id="item" placeholder="Insert the item" />
+    <form class="add-item-form" #form1="ngForm" (ngSubmit)="addItem()">
+        <input type="text" id="item" name="item" [(ngModel)]="item" placeholder="Insert an item" />
         <button type="submit"> Add Item </button>
     </form>
 
