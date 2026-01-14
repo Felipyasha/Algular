@@ -1,10 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { Calculator } from './calculator/calculator';
+import { WishList } from "./wish-list/wish-list";
 
 
 @Component({
   selector: 'app-root',
-  imports: [Calculator],
+  imports: [WishList],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

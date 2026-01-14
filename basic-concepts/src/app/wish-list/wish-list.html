@@ -1,0 +1,32 @@
+<div class="container">
+    <h1>Wish List</h1>
+
+    <form class="add-item-form" #form1="ngForm" (ngSubmit)="addItem()">
+        <input type="text" id="item" name="item" [(ngModel)]="item" placeholder="Insert an item" />
+        <button type="submit">Add Item</button>
+        <button type="button" (click)="clearList()">Clear list</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Item</th>
+                <th>Purchased</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of list; track item.id) {
+            <tr>
+                <td>{{item.id}}</td>
+                <td><span [ngClass]="{'item-purchased' : item.purchased }">{{item.name}}</span></td>
+                <td><input type="checkbox" (click)="buyItem(item)" [checked]="item.purchased"/></td>
+            </tr>
+            } @empty {
+                <tr colspan="3">
+                    No items added
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
