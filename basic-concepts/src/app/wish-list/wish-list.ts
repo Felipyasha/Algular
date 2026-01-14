@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from "@angular/forms";
+import { ItemList } from "./itemlist";
 
 @Component({
   selector: 'app-wish-list',
@@ -9,9 +10,17 @@ import { FormsModule } from "@angular/forms";
 })
 export class WishList {
   item: string = '';
-
+  list: ItemList[] = []; 
+  
   addItem(){
-    console.log(this.item);
-    this.item = '';      
+    let itemlist = new ItemList();
+    itemlist.name = this.item;
+    itemlist.id = this.list.length +1;
+
+    this.list.push(itemlist);
+    
+    this.item = '';  
+    
+    console.table(this.list);
   }
 }
