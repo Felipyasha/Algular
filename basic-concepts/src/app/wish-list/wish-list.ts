@@ -20,7 +20,5 @@ export class WishList {
     this.list.push(itemlist);
     
     this.item = '';  
-    
-    console.table(this.list);
   }
 }

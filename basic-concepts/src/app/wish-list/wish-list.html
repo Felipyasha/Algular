@@ -3,28 +3,29 @@
 
     <form class="add-item-form" #form1="ngForm" (ngSubmit)="addItem()">
         <input type="text" id="item" name="item" [(ngModel)]="item" placeholder="Insert an item" />
-        <button type="submit"> Add Item </button>
+        <button type="submit">Add Item</button>
     </form>
 
     <table>
         <thead>
             <tr>
-                <th>#</th>
+                <th>Id</th>
                 <th>Item</th>
-                <th></th>
+                <th>Purchased</th>
             </tr>
         </thead>
         <tbody>
+            @for (item of list; track item.id) {
             <tr>
-                <td>1</td>
-                <td>Óculos</td>
-                <td><input type="checkbox"/></td>
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td><input type="checkbox" /></td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Camiseta</td>
-                <td><input type="checkbox"/></td>
-            </tr>
+            } @empty {
+                <tr colspan="3">
+                    No items added
+                </tr>
+            }
         </tbody>
     </table>
 </div>
