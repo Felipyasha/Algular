@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { ItemList } from "./itemlist";
+import { NgClass } from "@angular/common";
+
 
 @Component({
   selector: 'app-wish-list',
-  imports: [ FormsModule ],
+  imports: [FormsModule, NgClass],
   templateUrl: './wish-list.html',
   styleUrl: './wish-list.scss',
 })
@@ -20,5 +22,13 @@ export class WishList {
     this.list.push(itemlist);
     
     this.item = '';  
+  }
+
+  buyItem(itemlist: ItemList){
+    itemlist.purchased = !itemlist.purchased;
+  }
+
+  clearList(){
+    this.list = [];
   }
 }
