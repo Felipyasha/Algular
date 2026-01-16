@@ -1,8 +1,14 @@
 <mat-toolbar color="primary">
   <span> Customer Registration </span>
   <span class="spacer"></span>
-  <a>Form</a>
-  <a>Consult</a>
+  <a routerLink="register">
+    <mat-icon fontIcon="feed"></mat-icon>
+    Form
+  </a>
+  <a routerLink="consult">
+    <mat-icon fontIcon="search"></mat-icon>
+    Consult
+  </a>
 </mat-toolbar>
 
 <router-outlet></router-outlet>

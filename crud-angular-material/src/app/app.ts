@@ -1,12 +1,12 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from "@angular/material/toolbar";
-import { Consultation } from "./consultation/consultation";
-import { Register } from "./register/register";
+import { MatIconModule } from "@angular/material/icon";
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MatToolbarModule, Consultation, Register],
+  imports: [RouterOutlet, RouterLink, MatToolbarModule, MatIconModule],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
