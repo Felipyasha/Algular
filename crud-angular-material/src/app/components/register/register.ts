@@ -10,6 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 import { Client } from './client';
+import { ClientService } from '../../services/client-service';
+
 
 @Component({
   selector: 'app-register',
@@ -28,8 +30,11 @@ import { Client } from './client';
 export class Register {
     client: Client = Client.newClient();
 
+    constructor(private service: ClientService){
+
+    }
+
     saveClient(){
-        console.log("Client data: ", this.client);
-        
+      this.service.save(this.client);        
     }
 }
