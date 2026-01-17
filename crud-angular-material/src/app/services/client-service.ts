@@ -10,7 +10,10 @@ export class ClientService {
   constructor() {}
 
   save(client: Client) {
-    console.log('Client data: ', client);
+    const storage = this.getStorage();
+    storage.push(client);
+
+    localStorage.setItem(ClientService.REPO_CLIENTS, JSON.stringify(storage));
   }
 
   getStorage(): Client[] {
@@ -18,7 +21,7 @@ export class ClientService {
     if (clientsRepository) {
       const clients: Client[] = JSON.parse(clientsRepository);
       return clients;
-    } 
+    }
 
     const clients: Client[] = [];
     localStorage.setItem(ClientService.REPO_CLIENTS, JSON.stringify(clients));
