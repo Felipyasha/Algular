@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
@@ -11,9 +11,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTable } from '@angular/material/table';
 
 import { ClientService } from '../../services/client-service';
+import { Client } from '../register/client';
 
 @Component({
-  selector: 'app-consultation',
+  selector: 'app-search',
   imports: [
     FlexLayoutModule,
     MatCardModule,
@@ -22,9 +23,17 @@ import { ClientService } from '../../services/client-service';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatTable
+    MatTable,
   ],
-  templateUrl: './consultation.html',
-  styleUrl: './consultation.scss',
+  templateUrl: './search.html',
+  styleUrl: './search.scss',
 })
-export class Consultation {}
+export class Search {
+  clientsList: Client[] = [];
+
+  constructor(private service: ClientService) {}
+
+  ngOnInit() {
+    this.clientsList = this.service.searchClients('');
+  }
+}
