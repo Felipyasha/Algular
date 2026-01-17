@@ -5,9 +5,23 @@ import { Client } from '../components/register/client';
   providedIn: 'root',
 })
 export class ClientService {
+  static REPO_CLIENTS = '_CLIENTS';
+
   constructor() {}
 
-  save(client: Client){
-    console.log("Client data: ", client);
+  save(client: Client) {
+    console.log('Client data: ', client);
+  }
+
+  getStorage(): Client[] {
+    const clientsRepository = localStorage.getItem(ClientService.REPO_CLIENTS);
+    if (clientsRepository) {
+      const clients: Client[] = JSON.parse(clientsRepository);
+      return clients;
+    } 
+
+    const clients: Client[] = [];
+    localStorage.setItem(ClientService.REPO_CLIENTS, JSON.stringify(clients));
+    return clients;
   }
 }
