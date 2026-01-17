@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule } from '@angular/forms';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -8,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
-import { FormsModule } from '@angular/forms';
+import { Client } from './client';
 
 @Component({
   selector: 'app-register',
@@ -19,9 +20,16 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
-export class Register {}
+export class Register {
+    client: Client = Client.newClient();
+
+    saveClient(){
+        console.log("Client data: ", this.client);
+        
+    }
+}
