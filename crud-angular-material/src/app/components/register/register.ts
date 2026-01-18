@@ -61,4 +61,8 @@ export class Register implements OnInit {
       this.router.navigate(['/search'])
     }
   }
+
+  clear(){
+    this.client = Client.newClient();
+  }
 }

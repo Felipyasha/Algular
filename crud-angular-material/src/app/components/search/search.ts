@@ -33,6 +33,7 @@ import { Client } from '../register/client';
 })
 export class Search implements OnInit {
   nameSearch: string = '';
+
   clientsList: Client[] = [];
   colunmsTable: string[] = ['id', 'name', 'ssn', 'birthday', 'email', 'actions'];
 
@@ -51,5 +52,14 @@ export class Search implements OnInit {
 
   sendToEdit(id: string) {
     this.router.navigate(['/register'], {queryParams: {"id": id}})
+  }
+
+  sendToDelete(client: Client){
+    client.deleting = true;
+  }
+
+  delete(client : Client){
+    this.service.deleteClient(client);
+    this.clientsList = this.service.searchClients('');
   }
 }

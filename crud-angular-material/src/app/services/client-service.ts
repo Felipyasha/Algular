@@ -43,6 +43,14 @@ export class ClientService {
     localStorage.setItem(ClientService.REPO_CLIENTS, JSON.stringify(storage));
   }
 
+  deleteClient(client : Client){
+    const storage = this.getStorage();
+
+    const newList = storage.filter(c => c.id !== client.id);
+
+    localStorage.setItem(ClientService.REPO_CLIENTS, JSON.stringify(newList));
+  }
+
   private getStorage(): Client[] {
     const clientsRepository = localStorage.getItem(ClientService.REPO_CLIENTS);
     if (clientsRepository) {
