@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from "@angular/common";
-
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 
@@ -13,6 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 
 import { ClientService } from '../../services/client-service';
 import { Client } from '../register/client';
+
 
 @Component({
   selector: 'app-search',
@@ -31,18 +32,24 @@ import { Client } from '../register/client';
   styleUrl: './search.scss',
 })
 export class Search implements OnInit {
-
   nameSearch: string = '';
   clientsList: Client[] = [];
-  colunmsTable: string[] = ["id", "name", "ssn", "birthday", "email"];
+  colunmsTable: string[] = ['id', 'name', 'ssn', 'birthday', 'email', 'actions'];
 
-  constructor(private service: ClientService) {}
+  constructor(
+    private service: ClientService,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.clientsList = this.service.searchClients('');
   }
 
-  search(){
+  search() {
     this.clientsList = this.service.searchClients(this.nameSearch);
+  }
+
+  sendToEdit(id: string) {
+    this.router.navigate(['/register'], {queryParams: {"id": id}})
   }
 }

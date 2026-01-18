@@ -35,6 +35,7 @@ export class Register {
     }
 
     saveClient(){
-      this.service.save(this.client);        
+      this.service.save(this.client); 
+      this.client = Client.newClient();       
     }
 }
