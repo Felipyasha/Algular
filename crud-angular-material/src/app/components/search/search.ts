@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from "@angular/common";
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatTable } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 
 import { ClientService } from '../../services/client-service';
 import { Client } from '../register/client';
@@ -23,13 +24,15 @@ import { Client } from '../register/client';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatTable,
+    MatTableModule,
+    CommonModule,
   ],
   templateUrl: './search.html',
   styleUrl: './search.scss',
 })
-export class Search {
+export class Search implements OnInit {
   clientsList: Client[] = [];
+  colunmsTable: string[] = ["id", "name", "ssn", "birthday", "email"];
 
   constructor(private service: ClientService) {}
 
