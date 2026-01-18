@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { Client } from './client';
 import { ClientService } from '../../services/client-service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -34,6 +34,7 @@ export class Register implements OnInit {
   constructor(
     private service: ClientService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -52,7 +53,12 @@ export class Register implements OnInit {
   }
 
   saveClient() {
-    this.service.save(this.client);
-    this.client = Client.newClient();
+    if (!this.updating) {
+      this.service.save(this.client);
+      this.client = Client.newClient();
+    } else {
+      this.service.updateClient(this.client);
+      this.router.navigate(['/search'])
+    }
   }
 }
