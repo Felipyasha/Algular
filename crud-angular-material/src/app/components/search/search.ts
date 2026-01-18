@@ -31,6 +31,8 @@ import { Client } from '../register/client';
   styleUrl: './search.scss',
 })
 export class Search implements OnInit {
+
+  nameSearch: string = '';
   clientsList: Client[] = [];
   colunmsTable: string[] = ["id", "name", "ssn", "birthday", "email"];
 
@@ -38,5 +40,9 @@ export class Search implements OnInit {
 
   ngOnInit() {
     this.clientsList = this.service.searchClients('');
+  }
+
+  search(){
+    this.clientsList = this.service.searchClients(this.nameSearch);
   }
 }
