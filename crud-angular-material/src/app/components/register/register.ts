@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { Client } from './client';
 import { ClientService } from '../../services/client-service';
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -27,15 +27,32 @@ import { ClientService } from '../../services/client-service';
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
-export class Register {
-    client: Client = Client.newClient();
+export class Register implements OnInit {
+  client: Client = Client.newClient();
+  updating: boolean = false;
 
-    constructor(private service: ClientService){
+  constructor(
+    private service: ClientService,
+    private route: ActivatedRoute,
+  ) {}
 
-    }
+  ngOnInit() {
+    this.route.queryParamMap.subscribe((query: any) => {
+      const params = query['params'];
+      const id = params['id'];
 
-    saveClient(){
-      this.service.save(this.client); 
-      this.client = Client.newClient();       
-    }
+      if (id) {
+        let clientFind = this.service.searchClientsForId(id);
+        if (clientFind) {
+          this.updating = true;
+          this.client = clientFind;
+        }
+      }
+    });
+  }
+
+  saveClient() {
+    this.service.save(this.client);
+    this.client = Client.newClient();
+  }
 }
