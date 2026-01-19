@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 import { ClientService } from '../../services/client-service';
 import { Client } from '../register/client';
@@ -33,6 +34,7 @@ import { Client } from '../register/client';
 })
 export class Search implements OnInit {
   nameSearch: string = '';
+  snack: MatSnackBar = inject(MatSnackBar);
 
   clientsList: Client[] = [];
   colunmsTable: string[] = ['id', 'name', 'ssn', 'birthday', 'email', 'actions'];
@@ -60,6 +62,11 @@ export class Search implements OnInit {
 
   delete(client : Client){
     this.service.deleteClient(client);
+    this.showMessage("Successfully deleted")
     this.clientsList = this.service.searchClients('');
+  }
+
+  showMessage(message: string){
+    this.snack.open(message, "Ok" )
   }
 }

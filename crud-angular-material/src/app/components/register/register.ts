@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
@@ -34,6 +35,7 @@ import { ClientService } from '../../services/client-service';
 export class Register implements OnInit {
   client: Client = Client.newClient();
   updating: boolean = false;
+  snack: MatSnackBar = inject(MatSnackBar);
 
   constructor(
     private service: ClientService,
@@ -60,13 +62,19 @@ export class Register implements OnInit {
     if (!this.updating) {
       this.service.save(this.client);
       this.client = Client.newClient();
+      this.showMessage("Successfully registered")
     } else {
       this.service.updateClient(this.client);
       this.router.navigate(['/search']);
+      this.showMessage("Successfully updated")
     }
   }
 
   clear() {
     this.client = Client.newClient();
+  }
+
+  showMessage(message: string){
+    this.snack.open(message, "Ok" )
   }
 }
