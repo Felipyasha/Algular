@@ -26,6 +26,31 @@ export class ClientService {
     return clients.filter((client) => client.name?.indexOf(nameSerach) !== -1);
   }
 
+  searchClientsForId(id: string): Client | undefined{
+    const clients = this.getStorage();
+    
+    return clients.find(client => client.id === id);
+  }
+
+  updateClient(client : Client){
+    const storage = this.getStorage();
+
+    storage.forEach(c => {
+      if (c.id === client.id) {
+        Object.assign(c,client)
+      }
+    })
+    localStorage.setItem(ClientService.REPO_CLIENTS, JSON.stringify(storage));
+  }
+
+  deleteClient(client : Client){
+    const storage = this.getStorage();
+
+    const newList = storage.filter(c => c.id !== client.id);
+
+    localStorage.setItem(ClientService.REPO_CLIENTS, JSON.stringify(newList));
+  }
+
   private getStorage(): Client[] {
     const clientsRepository = localStorage.getItem(ClientService.REPO_CLIENTS);
     if (clientsRepository) {

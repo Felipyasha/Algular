@@ -42,7 +42,8 @@
                   type="text"
                   [(ngModel)]="client.ssn"
                   name="ssn"
-                  placeholder="Enter your SSN"
+                  mask="999-99-9999" 
+                  placeholder="999-99-9999"
                   matInput
                 />
               </mat-form-field>
@@ -56,6 +57,7 @@
                   type="text"
                   [(ngModel)]="client.birthday"
                   name="birthday"
+                  mask="00/00/0000"
                   placeholder="Enter your birthday"
                   matInput
                 />
@@ -64,15 +66,18 @@
           </div>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-flat-button color="primary" type="submit">
-            <mat-icon fontIcon="save"></mat-icon>
-            Save
-          </button>
-          <button mat-flat-button color="primary">
-            <mat-icon fontIcon="refresh"></mat-icon>
-            Update
-          </button>
-          <button mat-flat-button color="accent" class="ml-5">
+          @if (!updating) {
+            <button mat-flat-button color="primary" type="submit">
+              <mat-icon fontIcon="save"></mat-icon>
+              Save
+            </button>
+          } @else {
+            <button mat-flat-button color="primary">
+              <mat-icon fontIcon="refresh"></mat-icon>
+              Update
+            </button>
+          }
+          <button mat-flat-button color="accent" class="ml-5" type="button" (click)="clear()">
             <mat-icon fontIcon="backspace"></mat-icon>
             Clear
           </button>
