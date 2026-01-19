@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,9 +10,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+
 import { Client } from './client';
 import { ClientService } from '../../services/client-service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +25,9 @@ import { ActivatedRoute, Router } from '@angular/router';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
+    NgxMaskDirective,
   ],
+  providers: [provideNgxMask()],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
@@ -58,11 +62,11 @@ export class Register implements OnInit {
       this.client = Client.newClient();
     } else {
       this.service.updateClient(this.client);
-      this.router.navigate(['/search'])
+      this.router.navigate(['/search']);
     }
   }
 
-  clear(){
+  clear() {
     this.client = Client.newClient();
   }
 }

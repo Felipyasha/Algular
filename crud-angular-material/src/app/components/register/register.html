@@ -42,7 +42,8 @@
                   type="text"
                   [(ngModel)]="client.ssn"
                   name="ssn"
-                  placeholder="Enter your SSN"
+                  mask="999-99-9999" 
+                  placeholder="999-99-9999"
                   matInput
                 />
               </mat-form-field>
@@ -56,6 +57,7 @@
                   type="text"
                   [(ngModel)]="client.birthday"
                   name="birthday"
+                  mask="00/00/0000"
                   placeholder="Enter your birthday"
                   matInput
                 />
